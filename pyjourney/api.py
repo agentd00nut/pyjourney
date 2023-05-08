@@ -27,13 +27,11 @@ class MidjourneyAPI:
             "referer": "https://www.midjourney.com/app/"
         }
 
-        self.session = self.get_session_from_env()
-        self.user_id = user_id
-
         if not cookie:
             cookie = os.getenv("MIDJOURNEY_COOKIE")
-        
-        self.get_session_from_env(cookie)
+
+        self.session = self.get_session_from_env(cookie)
+        self.user_id = user_id
 
     def get_session_from_env(self, cookie: str):
         """Returns a session from the environment variables
