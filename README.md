@@ -38,5 +38,5 @@ from pyjourney import MidjourneyAPI
 
 api = MidjourneyAPI()        #Loads your cookie and userId from the .env file  (required for now.)
 request = api.recent_jobs()  # Defaults to fetching the most recent 35 jobs you've done.
-print(request.status_code)
+print(request.status_code)  # request.json() should work if this is 200 :)
 ```
