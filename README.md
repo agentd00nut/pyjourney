@@ -8,6 +8,18 @@ A python module for calling the Midjourney API.
 pip install pyjourney
 ```
 
+## Setup
+
+Create a .env file in the root of your project and add the following:
+
+```bash
+MIDJOURNEY_COOKIE=your_cookie
+MIDJOURNEY_USERID=your_userId
+```
+
+The userID should be the newer GUID version of the userid, not the old integer version.
+The cookie can be taken from the cookie header in your browser when you're logged in to Midjourney for any request against the API.
+
 ## Usage
 
 ```python
