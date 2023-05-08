@@ -4,6 +4,8 @@ A python module for calling the Midjourney API to get job details and for creati
 
 Currently just trying to fix [midjourney-graph](https://github.com/agentd00nut/midjourney-graph) and figured i'd break out the api calls into a module.
 
+[pypi](https://pypi.org/project/pyjourney/)
+
 ## TODO
 
 - [ ] more than 35 jobs at a time.
