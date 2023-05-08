@@ -1,10 +1,14 @@
 [tool.poetry]
 name = "pyjourney"
 version = "0.1.0"
-description = "mj"
+description = "Python module for interacting with the MidJourney API"
 authors = ["agentd00nut <agentd00nut@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/agentd00nut/pyjourney"
+repository = "https://github.com/agentd00nut/pyjourney"
+keywords = ["journey", "midjourney", "api", "python"]
+
 
 [tool.poetry.dependencies]
 python = "^3.10"
