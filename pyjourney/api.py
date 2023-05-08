@@ -11,7 +11,7 @@ class MidjourneyAPI:
     """Class for interacting with the Midjourney API
     """
 
-    def __init__(self, user_id: str = None):
+    def __init__(self, user_id: str = None, cookie=None):
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
         self.logger.addHandler(logging.StreamHandler())
@@ -30,7 +30,12 @@ class MidjourneyAPI:
         self.session = self.get_session_from_env()
         self.user_id = user_id
 
-    def get_session_from_env(self, env_var: str = "MIDJOURNEY_COOKIE"):
+        if not cookie:
+            cookie = os.getenv("MIDJOURNEY_COOKIE")
+        
+        self.get_session_from_env(cookie)
+
+    def get_session_from_env(self, cookie: str):
         """Returns a session from the environment variables
 
         Arguments:
@@ -42,17 +47,15 @@ class MidjourneyAPI:
         Raises:
             SessionException -- If the environment variable is not found
         """
-
-        cookie_string = os.getenv(env_var)
-
-        if not cookie_string:
+        
+        if not cookie:
             raise SessionException(
                 "Session file not found and no session in environment variables did you set the MIDJOURNEY_COOKIE environment variable?"
             )
 
         # https://stackoverflow.com/questions/17224054/how-to-add-a-cookie-to-the-cookiejar-in-python-requests-library
         cookiejar_dict = {}
-        for cookie_string in cookie_string.split(";"):
+        for cookie_string in cookie.split(";"):
             # maxsplit=1 because cookie value may have "="
             cookie_key, cookie_value = cookie_string.strip().split("=", maxsplit=1)
             cookiejar_dict[cookie_key] = cookie_value
