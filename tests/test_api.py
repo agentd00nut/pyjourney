@@ -10,7 +10,7 @@ class TestMidjourneyAPI(unittest.TestCase):
 
     def setUp(self):
 
-        self.api = MidjourneyAPI(userId=MIDJOURNEY_USERID)
+        self.api = MidjourneyAPI(user_id=MIDJOURNEY_USERID)
 
     def test_get_session_from_env(self):
         self.assertIsInstance(
