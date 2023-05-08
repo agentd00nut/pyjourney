@@ -1,6 +1,16 @@
 # PyJourney
 
-A python module for calling the Midjourney API.
+A python module for calling the Midjourney API to get job details and for creating jobs.
+
+Currently just trying to fix [midjourney-graph](https://github.com/agentd00nut/midjourney-graph) and figured i'd break out the api calls into a module.
+
+## TODO
+
+- [ ] more than 35 jobs at a time.
+- [ ] jobs by date range, type, and for other users
+- [ ] get sepcific job details for a job and a list of jobs
+- [ ] get the list of community jobs by hot, new, trending, etc.
+- [ ] Searching for jobs by title, description, and tags
 
 ## Installation
 
