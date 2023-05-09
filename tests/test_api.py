@@ -2,6 +2,8 @@ import unittest
 from pyjourney import MIDJOURNEY_USERID, MidjourneyAPI
 import requests
 
+from pyjourney.models import GetJobsArgs
+
 
 #  Test class for MidjourneyAPI
 
@@ -17,7 +19,7 @@ class TestMidjourneyAPI(unittest.TestCase):
             requests.Session)
 
     def test_recent_jobs(self):
-        result: requests.Response = self.api.recent_jobs()
+        result: requests.Response = self.api.recent_jobs(GetJobsArgs(amount=1, userId=MIDJOURNEY_USERID))
         self.assertIsInstance(result, requests.Response)
         self.assertEqual(result.status_code, 200)
         self.assertEqual(
@@ -25,6 +27,7 @@ class TestMidjourneyAPI(unittest.TestCase):
             "application/json; charset=utf-8")
         jobs = result.json()
         self.assertEqual(len(jobs), 1)
+        self.assertEqual(jobs[0]["user_id"], MIDJOURNEY_USERID)
 
     def test_job_status(self):
         result = self.api.recent_jobs()
