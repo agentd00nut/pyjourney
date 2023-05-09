@@ -1,3 +1,4 @@
+import time
 from dotenv import load_dotenv
 import requests
 import logging
@@ -27,13 +28,10 @@ class MidjourneyAPI:
             "referer": "https://www.midjourney.com/app/"
         }
 
-        if not cookie:
-            cookie = os.getenv("MIDJOURNEY_COOKIE")
-
-        self.session = self.get_session_from_env(cookie)
+        self.session = self._get_session_from_env(cookie)
         self.user_id = user_id
 
-    def get_session_from_env(self, cookie: str):
+    def _get_session_from_env(self, cookie: str = None):
         """Returns a session from the environment variables
 
         Arguments:
@@ -45,7 +43,9 @@ class MidjourneyAPI:
         Raises:
             SessionException -- If the environment variable is not found
         """
-        
+        if not cookie:
+            cookie = os.getenv("MIDJOURNEY_COOKIE")
+
         if not cookie:
             raise SessionException(
                 "Session file not found and no session in environment variables did you set the MIDJOURNEY_COOKIE environment variable?"
@@ -99,6 +99,47 @@ class MidjourneyAPI:
         self.logger.debug("Response: " + str(response.status_code))
         return response
 
+    def job_status(self, job_id_list: list[str]) -> requests.Response:
+        """
+        Returns the status of the jobs in the list
+
+        Arguments:
+            job_id_list {list} -- A list of job ids
+
+        Returns:
+            requests.Response -- The response from the API
+        """
+        url = self.root_url + "/api/app/job-status"
+        
+        if not isinstance(job_id_list, list):
+            job_id_list = [job_id_list]
+
+        j = {"jobIds": job_id_list}
+        self.logger.debug("Requesting " + url)
+
+        self.logger.debug("Request body: " + str(j))
+
+        response = self.session.post(
+            url, headers=self.headers, json=j, timeout=5)
+
+        # TODO:: extract the handling of response codes to a member function
+        if response.status_code == 429:
+            raise Exception("Too many requests")
+
+        tries = 0
+        while response.status_code == 302 or response.status_code == 308:
+            self.logger.debug("Redirecting to " + response.headers["Location"])
+            time.sleep(1)
+            tries += 1
+            if tries > 1:
+                raise Exception("Too many redirects")
+            response = self.session.get(response.headers["Location"])
+
+            if response.status_code == 429:
+                raise Exception("Too many requests")
+
+        self.logger.debug("Response: " + str(response.status_code))
+        return response
 
 if __name__ == "__main__":
     logger = logging.getLogger(__name__)

@@ -4,7 +4,7 @@ class GetJobsArgs:
 
     def __init__(
             self,
-            amount=35,
+            amount=1,
             dedupe=True,
             jobStatus="completed",
             orderBy="new",
