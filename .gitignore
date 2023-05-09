@@ -166,3 +166,4 @@ cython_debug/
 dist
 
 actions
+test.py

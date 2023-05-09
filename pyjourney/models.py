@@ -13,7 +13,7 @@ class GetJobsArgs:
             searchType="advanced",
             service="null",
             type="all",
-            user_id="",
+            userId="",
             user_id_ranked_score="null",
             _ql="todo",
             _qurl="https://www.midjourney.com/app/"):
@@ -26,7 +26,7 @@ class GetJobsArgs:
         self.searchType = searchType
         self.service = service
         self.type = type
-        self.user_id = user_id
+        self.userId = userId
         self.user_id_ranked_score = user_id_ranked_score
         self._ql = _ql
         self._qurl = _qurl
@@ -56,7 +56,7 @@ class GetJobsArgs:
             "searchType": self.searchType,
             "service": self.service,
             "type": self.type,
-            "user_id": self.user_id,
+            "userId": self.userId,
             "user_id_ranked_score": self.user_id_ranked_score,
             "_ql": self._ql,
             "_qurl": self._qurl
