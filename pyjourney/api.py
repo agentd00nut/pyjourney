@@ -110,7 +110,7 @@ class MidjourneyAPI:
             requests.Response -- The response from the API
         """
         url = self.root_url + "/api/app/job-status"
-        
+
         if not isinstance(job_id_list, list):
             job_id_list = [job_id_list]
 

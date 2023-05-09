@@ -8,9 +8,9 @@ Currently just trying to fix [midjourney-graph](https://github.com/agentd00nut/m
 
 ## TODO
 
-- [ ] more than 35 jobs at a time.
+- [x] more than 35 jobs at a time.
 - [ ] jobs by date range, type, and for other users
-- [ ] get sepcific job details for a job and a list of jobs
+- [x] get sepcific job details for a job and a list of jobs
 - [ ] get the list of community jobs by hot, new, trending, etc.
 - [ ] Searching for jobs by title, description, and tags
 
